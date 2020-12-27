@@ -1,0 +1,19 @@
+{
+    "name": "server",
+    "description": "EXPRESS EJS app",
+    "author": "Nick Chong",
+    "version": "0.0.1",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cookie-session": "^1.4.0",
+        "ejs": "^3.1.5",
+        "express": "^4.17.1",
+        "express-formidable": "*",
+        "mongodb": "3.6.3",
+        "nodemon": "^2.0.6"
+    },
+    "engine": "node >= 12.0.0",
+    "scripts": {
+        "start": "node server"
+    }
+}

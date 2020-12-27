@@ -1,0 +1,48 @@
+<html>
+    <body>
+        <h1><%= name %> Please select your rating.</h1>
+
+        <form action="/insertScore">
+
+            <!-- Restaurant_id -->
+            <input type="hidden" name="restaurant_id" value=<%= restaurant_id %>>
+
+            <!-- User -->
+            <input type="hidden" name="user" value=<%= name %>>
+
+            <!-- Score -->
+            <input type="radio" id="score1" name="score" value="1">
+            <label for="score1">1</label><br>
+
+            <input type="radio" id="score2" name="score" value="2">
+            <label for="score2">2</label><br>
+
+            <input type="radio" id="score3" name="score" value="3">
+            <label for="score3">3</label><br>
+
+            <input type="radio" id="score4" name="score" value="4">
+            <label for="score4">4</label><br>
+
+            <input type="radio" id="score5" name="score" value="5">
+            <label for="score5">5</label><br>
+
+            <input type="radio" id="score6" name="score" value="6">
+            <label for="score6">6</label><br>
+
+            <input type="radio" id="score7" name="score" value="7">
+            <label for="score7">7</label><br>
+
+            <input type="radio" id="score8" name="score" value="8">
+            <label for="score8">8</label><br>
+
+            <input type="radio" id="score9" name="score" value="9">
+            <label for="score9">9</label><br>
+
+            <input type="radio" id="score10" name="score" value="10">
+            <label for="score10">10</label><br>
+
+            <br>
+            <input type="submit" value="Submit">
+          </form>
+    </body>
+</html>

@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>Restaurant Details</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+      integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+      crossorigin=""
+    ></script>
+  </head>
+  <body>
+    <H1>Hello, <%= name %></H1>
+    <a href="/logout">Logout</a>
+
+    <p>Holder: <%= holder %></p>
+
+    <% if (holder) { %>
+    <a href="/edit?_id=<%= restaurant._id %>">edit</a><br />
+    <a href="/delete?restaurant_id=<%= restaurant.restaurant_id %>">Delete</a><br />
+    <% } %>
+
+    <H2>Restaurant Details</H2>
+    <hr />
+    <p>Restaurant ID: <%= restaurant.restaurant_id %></p>
+    <p>Name: <%= restaurant.name %></p>
+    <p>Borough: <%= restaurant.borough %></p>
+    <p>Cuisine: <%= restaurant.cuisine %></p>
+    <p>Address:</p>
+    <p>Street: <%= restaurant.address.street %></p>
+    <p>Building: <%= restaurant.address.building %></p>
+    <p>Zipcode: <%= restaurant.address.zipcode %></p>
+    <p>lat: <%= restaurant.address.coord[0] %></p>
+    <p>lon: <%= restaurant.address.coord[1] %></p>
+
+    <p>Owner: <%= restaurant.owner %></p>
+
+    <h3>Grades:</h3>
+    <% var isScored = false; %>
+    <% if ( restaurant.grades == undefined || restaurant.grades.length == 0 ) { %>
+      <h2>Not Any grades , You can rate: </h2>
+      <%- include("score.ejs",{restaurant_id:restaurant.restaurant_id , name:name})%>
+    <% } else { %>
+      <table>
+        <tr>
+          <th>User</th>
+          <th>Score</th>
+        </tr>
+        <% for (var i = 0; i < restaurant.grades.length; i++) { 
+                if(restaurant.grades[i].user == name){
+                  isScored = true;
+                }
+        %>
+        <tr>
+          <td><%= restaurant.grades[i].user %></td>
+          <td><%= restaurant.grades[i].score %></td>
+        </tr>
+        <% } %>
+      </table>
+      <% if(!isScored) {%>
+      <%- include("score.ejs",{restaurant_id:restaurant.restaurant_id , name:name})%>
+      <%}%>
+    <% } %> 
+    
+    <% if (restaurant.photo) { %>
+    <img src="data:image/jpg;base64, <%= restaurant.photo %>" /><br />
+    <% } %>
+
+    <a href="/">home</a>
+
+    <div id="map" style="width: 900px; height: 580px"></div>
+    <script>
+      // Creating map options
+      var mapOptions = {
+         center: [<%=restaurant.address.coord[0]%>,<%=restaurant.address.coord[1]%>],
+         zoom: 30
+      }
+
+      // Creating a map object
+      var map = new L.map('map', mapOptions);
+
+      // Creating a Layer object
+      var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+      // Adding layer to the map
+      map.addLayer(layer);
+
+      // Creating a marker
+      var marker = L.marker([<%=restaurant.address.coord[0]%>,<%=restaurant.address.coord[1]%>]);
+
+      // Adding marker to the map
+      marker.addTo(map);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+    <body>
+        Restaurant Information Edit Mode:
+        <H1>Hello, <%= name %></H1>
+        <form action="/insert" method="POST" enctype="multipart/form-data">
+            Restaurant ID: <input name="restaurant_id"><br>
+            Name: <input name="name"/><br>
+            Borough: <input name="borough"/><br>
+            Cuisine: <input name="cuisine"/><br>
+
+            address
+            <hr>
+            Street: <input name="street"/><br>
+            Building: <input name="building"/><br>
+            Zipcode: <input name="zipcode"/><br>
+
+            Coord: <br>
+            lat:
+            <input name="lat"/>
+            lon:
+            <input name="lon"/><br>
+            
+            <input type="file" name="filetoupload"><br>
+            <input type="hidden" name="owner" value=<%= name %>>
+            <input type="submit" value="Add">  
+        </form>
+    </body>
+</html>

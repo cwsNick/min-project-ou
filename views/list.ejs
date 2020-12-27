@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <H2>Restaurant (<%= nrestaurants %>)</H2>
+        <H1>Hello, <%= name %></H1>
+        <hr>
+        <a href='/logout'>Logout</a>
+        <br>
+        <a href='/add'>Add Restaurant</a>
+        <hr>
+        <form action="/searchByName">
+            Name: <input name="name"/><br>
+            <input type="submit" value="Search By Name">  
+        </form>
+        <hr>
+        <form action="/searchByBorough">
+            Borough: <input name="borough"/><br>
+            <input type="submit" value="Search By Borough">  
+        </form>
+        <hr>
+        <form action="/handle_searchByCuisine">
+            Cuisine: <input name="cuisine"/><br>
+            <input type="submit" value="Search By Cuisine">  
+        </form>
+
+        <ul>
+            <% for (var b of restaurants) { %>
+            <li>Restaurant ID: <a href="/details?_id=<%= b._id %>"><%= b.restaurant_id %> | Name: <%= b.name %>| Borough : <%= b.borough%>| Cuisine: <%= b.cuisine%></li></a>
+            <% } %>
+        </ul>
+    </body>
+</html>
