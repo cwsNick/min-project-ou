@@ -9,7 +9,7 @@ const ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
 const fs = require('fs');
 const formidable = require('express-formidable');
-const mongourl = 'mongodb+srv://rso:student@cluster0.1ms3d.mongodb.net/project?retryWrites=true&w=majority';
+const mongourl = '';
 const dbName = 'project';
 
 app.use(formidable());
