@@ -9,7 +9,7 @@ const ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
 const fs = require('fs');
 const formidable = require('express-formidable');
-const mongourl = '';
+const mongourl = 'mongodb+srv://rso:student@cluster0.1ms3d.mongodb.net/project?retryWrites=true&w=majority';
 const dbName = 'project';
 
 app.use(formidable());
@@ -319,6 +319,72 @@ const handle_Delete = (res, criteria) => {
         });
     });
 }
+
+/*  READ-Name
+
+*/
+app.get('/api/restaurant/name/:name', (req,res) => {
+    if (req.params.name) {
+        let criteria = {};
+        criteria['name'] = req.params.name;
+        const client = new MongoClient(mongourl);
+        client.connect((err) => {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+            const db = client.db(dbName);
+
+            findDocument(db, criteria, (docs) => {
+                client.close();
+                console.log("Closed DB connection");
+                res.status(200).json(docs);
+            });
+        });
+    } else {
+        res.status(500).json({"error": "missing name"});
+    }
+})
+
+app.get('/api/restaurant/borough/:borough', (req,res) => {
+    if (req.params.borough) {
+        let criteria = {};
+        criteria['borough'] = req.params.borough;
+        const client = new MongoClient(mongourl);
+        client.connect((err) => {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+            const db = client.db(dbName);
+
+            findDocument(db, criteria, (docs) => {
+                client.close();
+                console.log("Closed DB connection");
+                res.status(200).json(docs);
+            });
+        });
+    } else {
+        res.status(500).json({"error": "missing borough"});
+    }
+})
+
+app.get('/api/restaurant/cuisine/:cuisine', (req,res) => {
+    if (req.params.cuisine) {
+        let criteria = {};
+        criteria['cuisine'] = req.params.cuisine;
+        const client = new MongoClient(mongourl);
+        client.connect((err) => {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+            const db = client.db(dbName);
+
+            findDocument(db, criteria, (docs) => {
+                client.close();
+                console.log("Closed DB connection");
+                res.status(200).json(docs);
+            });
+        });
+    } else {
+        res.status(500).json({"error": "missing cuisine"});
+    }
+})
 
 //Login
 const SECRETKEY = 'It is min-project';
